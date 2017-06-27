@@ -1,1 +1,4 @@
-/* Styles go here */
+.strikeThrough {
+    text-decoration: line-through;
+    color: slategray;
+}
