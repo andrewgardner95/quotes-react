@@ -18,7 +18,12 @@ const API = {
   // favorite quote toggle's a quote's 'favorite' status in the db,
   // expects the quote object as an argument
   favoriteQuote: function(quote) {
-    quote.favorited = !quote.favorited;
+    if (quote.favorited === "false") {
+      quote.favorited = true;
+    } else {
+      quote.favorite = false;
+    }
+    console.log("favorited after", quote.favorited);
     const { _id, favorited } = quote;
     return axios.patch(`/api/quotes/${_id}`, { favorited });
   }

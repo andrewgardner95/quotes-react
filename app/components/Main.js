@@ -18,17 +18,17 @@ class Main extends React.Component {
 
   // rendering all quotes as soon as the page is loaded
   componentDidMount() {
-    API.getQuotes().then((data) => {
-      this.setState({ saved: data.data });
+    API.getQuotes().then((quotesData) => {
+      this.setState({ saved: quotesData.data });
     });
   }
 
   // saving new quotes so that they can be rendered after they are inputted
   componentDidUpdate(prevProps, nextProps) {
     if (prevProps.quote != nextProps.quote) {
-      API.saveQuote(this.state.quote).then((data) => {
-        API.getQuotes().then((data) => {
-          this.setState({ saved: data.data, quote: "" });
+      API.saveQuote(this.state.quote).then((quotesData) => {
+        API.getQuotes().then((quotesData) => {
+          this.setState({ saved: quotesData.data, quote: "" });
         });
       });
     }

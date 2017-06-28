@@ -18,12 +18,16 @@ module.exports = {
       });
   },
   // This method handles creating new quotes
-  create: function(req, res) {
-    Quote.create(req.body).then(function(doc) {
-      res.json(doc);
-    }).catch(function(err) {
-      res.json(err);
-    });
+  create: function (req, res) {
+    if (req.body.text != "") {
+      Quote.create(req.body).then(function (doc) {
+        res.json(doc);
+      }).catch(function (err) {
+        res.json(err);
+      });
+    } else {
+      console.log("the text cannot be blank")
+    }
   },
   // This method handles updating quotes
   update: function(req, res) {
