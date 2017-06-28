@@ -1,7 +1,7 @@
 import React from "react";
 
 var Form = React.createClass ({
-    
+
     getInitialState: function() {
         return { quote: "" };
     },
@@ -10,8 +10,6 @@ var Form = React.createClass ({
     },
     handleSubmit: function(event) {
         event.preventDefault();
-
-        console.log("Adding item:", this.state.quote);
 
         // Set the parent to have the search term
         this.props.setQuote(this.state.quote);
