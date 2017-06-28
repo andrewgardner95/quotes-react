@@ -13,25 +13,23 @@ import Footer from "./children/Footer";
 import API from "../utils/API.js";
 
 var Main = React.createClass({
+
+  getInitialState: function() {
+    return {saved: [], quote: []};
+  },
+
   // This function allows children to update the parent.
   setQuote: function(quote) {
-    this.setState({ quote: quote });
+    this.setState({ saved: quote });
   },
   render: function () {
     return (
         <div>
             <Nav />
 
-            <div>
-                {this.props.items.map(function(item, index) {
-                    return (
-                        <Quotes item={item} key={"item"+index}/>
-                    )
-                })
-                }
-            </div>
+            <Quotes saved={this.state.saved}/>
 
-            <Form />
+            <Form setQuote={this.setQuote}/>
 
             <Footer />
         </div>
