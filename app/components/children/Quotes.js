@@ -1,6 +1,8 @@
 import React from "react";
+import API from "../../utils/API.js";
 
 class Quotes extends React.Component {
+    
   render() {
     return (
         <div>
