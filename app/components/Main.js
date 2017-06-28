@@ -16,14 +16,14 @@ class Main extends React.Component {
     this.setQuote = this.setQuote.bind(this);
   }
 
-  // getting the quotes inputted previously so they can be rendered
+  // rendering all quotes as soon as the page is loaded
   componentDidMount() {
     API.getQuotes().then((data) => {
       this.setState({ saved: data.data });
     });
   }
 
-  // saving quotes so that they can be displayed after they are inputted
+  // saving new quotes so that they can be rendered after they are inputted
   componentDidUpdate(prevProps, nextProps) {
     if (prevProps.quote != nextProps.quote) {
       API.saveQuote(this.state.quote).then((data) => {
@@ -34,7 +34,7 @@ class Main extends React.Component {
     }
   }
 
-  // This function allows children to update the parent, called when Form.js is submitted
+  // This function allows children to update the parent when Form.js is submitted
   setQuote(quote) {
     this.setState({ quote: quote });
   }
@@ -43,10 +43,8 @@ class Main extends React.Component {
     return (
         <div>
             <Nav  />
-              <div>
                 <Form setQuote={this.setQuote}/>
-                <Quotes saved={this.state.saved}/>
-              </div>
+                <Quotes saved={this.state.saved}/>  
             <Footer />
         </div>
     );

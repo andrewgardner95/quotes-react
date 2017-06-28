@@ -17,16 +17,12 @@ class Quotes extends React.Component {
 
     render() {
         return (
-            <div className="panel panel-default">
-                <div className="panel-heading">
-                    <h3 className="panel-title text-center">Quotes</h3>
-                </div>
-                <div className="panel-body text-center">
+            <div>
+                <h3>Quotes</h3>
+                <div>
                     {this.state.saved.map((saved, i) => {
                         return (
-                            <p key={i}>
-                                {saved.text}
-                            </p>
+                            <p key={i}>{saved.text}</p>
                         )
                     })}
                 </div>
