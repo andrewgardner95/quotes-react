@@ -1,7 +1,6 @@
 import React from "react";
 
 class Form extends React.Component {
-
     constructor(props) {
     // This super(props) line lets us access our parents properties as props.
     super(props);
@@ -21,6 +20,7 @@ class Form extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log("Item Added:" + this.state.quote)
     this.props.setQuote(this.state.quote);
     this.setState({ quote: "" });
   }

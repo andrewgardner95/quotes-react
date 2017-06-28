@@ -5,31 +5,53 @@ import Nav from "./children/Nav";
 import Footer from "./children/Footer";
 import API from "../utils/API.js";
 
-var Main = React.createClass({
+class Main extends React.Component {
 
-  getInitialState: function() {
-    return {saved: [], quote: []};
-  },
+  constructor(props) {
+    super(props)
+    this.state = {
+      saved: [],
+      quote: []
+    }
+    this.setQuote = this.setQuote.bind(this);
+  }
 
-  // This function allows children to update the parent.
-  setQuote: function(quote) {
-    this.setState({ saved: quote });
-  },
+  // getting the quotes inputted previously so they can be rendered
+  componentDidMount() {
+    API.getQuotes().then((data) => {
+      this.setState({ saved: data.data });
+    });
+  }
 
-  render: function () {
+  // saving quotes so that they can be displayed after they are inputted
+  componentDidUpdate(prevProps, nextProps) {
+    if (prevProps.quote != nextProps.quote) {
+      API.saveQuote(this.state.quote).then((data) => {
+        API.getQuotes().then((data) => {
+          this.setState({ saved: data.data, quote: "" });
+        });
+      });
+    }
+  }
+
+  // This function allows children to update the parent, called when Form.js is submitted
+  setQuote(quote) {
+    this.setState({ quote: quote });
+  }
+
+  render() {
     return (
         <div>
-            <Nav />
-
-            <Form setQuote={this.setQuote}/>
-
-            <Quotes saved={this.state.saved}/>
-
+            <Nav  />
+              <div>
+                <Form setQuote={this.setQuote}/>
+                <Quotes saved={this.state.saved}/>
+              </div>
             <Footer />
         </div>
     );
   }
-});
+}
 
 // Export the component back for use in other files
 module.exports = Main;
